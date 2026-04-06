@@ -1264,6 +1264,21 @@ export default function App() {
                       </SAPButton>
                     </div>
                   </div>
+                  <div style={{ borderTop: `1px solid ${SAP.border}`, paddingTop: "12px", display: "flex", flexDirection: "column", gap: "10px" }}>
+                    <div style={{ fontSize: "12px", color: SAP.textLight }}>Export แยกตามหน่วย + ระดับราคา</div>
+                    {exportUnits.length ? exportUnits.map((unit) => (
+                      <div key={unit} style={{ display: "flex", alignItems: "center", gap: "8px", justifyContent: "center", flexWrap: "nowrap", overflowX: "auto" }}>
+                        <span style={{ minWidth: "70px", fontSize: "12px", fontWeight: 700, color: SAP.text }}>{unit}</span>
+                        {[0, 1, 4, 5].map((level) => (
+                          <SAPButton key={`${unit}-${level}`} variant="default" icon="download" onClick={() => exportTextByUnitAndLevel(unit, level)}>
+                            {`ระดับ ${level}`}
+                          </SAPButton>
+                        ))}
+                      </div>
+                    )) : (
+                      <div style={{ fontSize: "12px", color: SAP.textLight }}>ยังไม่พบข้อมูลหน่วยสำหรับ export</div>
+                    )}
+                  </div>
                 </div>
               </div>
             </Panel>
